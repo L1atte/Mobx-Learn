@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App 1";
+import App from "./App";
 import "./index.css";
 import { createManager } from "./state";
 import { ManagerContext } from "./state";

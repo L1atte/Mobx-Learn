@@ -5,7 +5,12 @@ import { TodoItem } from "./stores/TodoStore";
 import { observer } from "mobx-react";
 
 const App = observer(() => {
-	const { countInstance } = useStores();
+	const { todoInstance, countInstance } = useStores();
+	const { todos, addItem, reset, toggle } = todoInstance;
+
+	function onToggleCompleted(item: TodoItem) {
+		toggle(item);
+	}
 
 	return (
 		<div className="App">
@@ -36,6 +41,28 @@ const App = observer(() => {
 			<p className="read-the-docs">Click on the Vite and React logos to learn more</p>
 
 			<h1>Todo List</h1>
+			<div>
+				<button onClick={() => addItem(Math.random().toString())}>ADD</button>
+			</div>
+			<div>
+				<button onClick={reset}>RESET</button>
+			</div>
+			<ul>
+				{todos.map(item => {
+					return (
+						<li key={item.task}>
+							<input
+								type="checkbox"
+								checked={item.completed}
+								onChange={() => onToggleCompleted(item)}
+							/>
+							{item.task}
+						</li>
+					);
+				})}
+			</ul>
+
+			<h1>Count Store</h1>
 			<div>
 				<button onClick={countInstance.increase}>ADD</button>
 			</div>
